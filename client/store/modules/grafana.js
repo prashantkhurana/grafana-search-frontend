@@ -2,9 +2,9 @@
 import axios from 'axios';
 
 const state = {
-  dashboardData : {
+  dashboardData : [{
       "test" : 0
-  }
+  }]
 }
 
 // getters
@@ -18,10 +18,10 @@ const getters = {
 const actions = {
   refreshDashboardData({commit, state}) {
       axios.get("http://localhost:8082/getGrafanaData").then(response => {
-         var newData = Object.keys(response.data).map(function(key) {
-            return { name: key, keywords: response.data[key]};
-          }) 
-          commit("setDashboardData", newData);
+        //  var newData = Object.keys(response.data).map(function(key) {
+        //     return { name: key, keywords: response.data[key]};
+        //   }) 
+          commit("setDashboardData", response.data);
       }).catch(error => {
           console.log(error);
       })
